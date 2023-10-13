@@ -1,28 +1,6 @@
 <?php
+
 require_once 'config/function.php';
-
-if (isset($_SESSION['username'])) {
-    return header("Location: pages/index.php");
-}
-
-if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password']; // Hash the input password using SHA-256
-
-    $sql = "SELECT * FROM anggota WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($conn, $sql);
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        foreach ($row as $value) {
-            if($row['username'] == $username && $row['password'] == $password){
-                $_SESSION['username'] = $username;
-                return header("Location: pages/index.php");
-            }else{
-                echo "<script>alert('Username atau password Anda salah. Silakan coba lagi!')</script>";
-            }
-        }
-    }
-}
 
 ?>
 
@@ -38,9 +16,7 @@ if (isset($_POST['submit'])) {
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
 
     <title>
-
         Kerumahtanggan
-
     </title>
 
     <!--     Fonts and icons     -->
@@ -62,9 +38,15 @@ if (isset($_POST['submit'])) {
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 
 <body class="sign-in-basic">
+
     <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');" loading="lazy">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
@@ -77,6 +59,7 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
                         <div class="card-body">
+
                             <form method="POST" action="" class="text-start">
                                 <div class="input-group input-group-outline my-3">
                                     <input type="username" name="username" placeholder="Username" class="form-control" required>
@@ -95,14 +78,14 @@ if (isset($_POST['submit'])) {
         </div>
 
     </div>
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-    <script src="../assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
+    <!-- Core -->
+    <script src="/assets/js/core/popper.min.js"></script>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
+
+    <!-- Theme JS -->
+    <script src="./assets/js/material-kit-pro.min.js" type="text/javascript"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>
