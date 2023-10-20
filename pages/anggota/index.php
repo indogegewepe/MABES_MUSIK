@@ -82,6 +82,12 @@ $result = mysqli_query($conn, $sql);
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="#" class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="material-icons opacity-6 me-2 text-md">person</i>hi, 
+                                        <?= $_SESSION['username'] ?>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="logout.php" class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="material-icons opacity-6 me-2 text-md">logout</i>
                                         Log Out

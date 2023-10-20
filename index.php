@@ -68,7 +68,7 @@ require_once 'config/function.php';
                                     <input type="password" name="password" placeholder="Password" class="form-control" required>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" name="submit" value="submit" class="btn btn-primary w-auto me-1 mb-0 w-100">Sign In</button>
+                                    <button type="submit" name="login" value="submit" class="btn btn-primary w-auto me-1 mb-0 w-100">Sign In</button>
                                 </div>
                             </form>
                         </div>
