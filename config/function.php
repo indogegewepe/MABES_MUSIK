@@ -4,6 +4,14 @@ require_once "init.php";
 
 session_start();
 
+function test_input($dataIn)
+{
+    $dataIn = trim($dataIn);
+    $dataIn = stripslashes($dataIn);
+    $dataIn = htmlspecialchars($dataIn);
+    return $dataIn;
+}
+
 //Login
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -50,24 +58,39 @@ if (isset($_POST['login'])) {
 
 // Insert Alat
 if (isset($_POST['insertAlat'])) {
+    $namaAlat = test_input($_POST['nama_alat']);
+    $merek = test_input($_POST['merek']);
+    $seri = test_input($_POST['seri']);
+    $keterangan = test_input($_POST['keterangan']);
 
-    $namaAlat = $_POST['nama_alat'];
-    $merek = $_POST['merek'];
-    $seri = $_POST['seri'];
-    $keterangan = $_POST['keterangan'];
+    $conn->query("INSERT INTO `daftaralat` (`id_alat`, `nama_alat`, `merek`, `seri`, `keterangan`) VALUES ('', '$namaAlat', '$merek', '$seri', '$keterangan');");
+    return header("location:../pages/admin/");
 
-    $sql = "INSERT INTO `daftaralat` VALUES (NULL, '$namaAlat', '$merek', '$seri', '$keterangan');";
-    $result = mysqli_query($conn, $sql);
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        foreach ($row as $value) {
-            if ($row['username'] == $username && $row['password'] == $password) {
-                $_SESSION['username'] = $username;
-                return header("Location: pages/admin");
-            }
-        }
-    }
 }
 
+//edit alat
+if (isset($_POST["edit"])) {
+    $id = $_GET['id'];
+    $namaAlat = test_input($_POST['nama_alat']);
+    $merek = test_input($_POST['merek']);
+    $seri = test_input($_POST['seri']);
+    $keterangan = test_input($_POST['keterangan']);
+
+    mysqli_query($conn, "UPDATE daftaralat SET `nama_alat` = '$namaAlat', `merek` = '$merek', `seri` = '$seri', `keterangan` = '$keterangan' WHERE id_alat = $id");
+    header("Location: ./");
+
+?>
+
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+
+<?php }
 
 ?>

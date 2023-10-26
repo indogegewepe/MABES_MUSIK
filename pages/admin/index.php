@@ -5,12 +5,12 @@ require_once "../../config/function.php";
 if (isset($_SESSION['username'])) {
     $sql = "SELECT username FROM admin";
     $result = mysqli_query($conn, $sql);
-    
+
     while ($row = mysqli_fetch_assoc($result)) {
         foreach ($row as $value) {
             if ($row['username'] == $_SESSION['username']) break;
+            // else return (header("Location: ../anggota/"));
         }
-        return (header("Location: ../anggota/"));
     }
 } else return (header("Location: ../../index.php"));
 
@@ -28,7 +28,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
     <title>
-        Material Dashboard by Creative Tim
+        Admin Dashboard
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -43,6 +43,8 @@ $result = mysqli_query($conn, $sql);
     <link href="../../config/cees.css" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -88,8 +90,6 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
 
-
-
         <div class="container mt-7 blur border-radius-xl shadow">
             <div class="table-responsive">
                 <table class="table">
@@ -128,8 +128,8 @@ $result = mysqli_query($conn, $sql);
                                         </div>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <button type="button" class="btn btn-success"> <i class="material-icons opacity-6 text-md">edit</i></button>
-                                        <button type="button" class="btn btn-primary"> <i class="material-icons opacity-6 text-md">delete</i></button>
+                                        <a type="button" class="btn btn-success" href="editalat.php?id=<?= $row['id_alat'] ?>"> <i class="material-icons opacity-6 text-md">edit</i></a>
+                                        <a type="button" class="btn btn-primary" href="hapusalat.php?id=<?= $row['id_alat'] ?>"> <i class="material-icons opacity-6 text-md">delete</i></a>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -148,31 +148,31 @@ $result = mysqli_query($conn, $sql);
         <div style="position: fixed; width: -webkit-fill-available; left: auto;" class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-5" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form method="POST" action="" class="text-start">
+                    <form method="POST" action="../../config/function.php" class="text-start">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Insert Alat</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Nama Alat" aria-label="nama_alat" nama="nama_alat" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" placeholder="Nama Alat" aria-label="nama_alat" name="nama_alat" aria-describedby="basic-addon1">
                             </div>
 
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Merek" aria-label="merek" nama="merek" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" placeholder="Merek" aria-label="merek" name="merek" aria-describedby="basic-addon1">
                             </div>
 
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Seri" aria-label="seri" nama="seri" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" placeholder="Seri" aria-label="seri" name="seri" aria-describedby="basic-addon1">
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-text">Keterangan</span>
-                                <textarea class="form-control" aria-label="With textarea" nama="keterangan"></textarea>
+                                <textarea class="form-control" aria-label="With textarea" name="keterangan"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Tutup</button>
                             <button type="submit" name="insertAlat" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

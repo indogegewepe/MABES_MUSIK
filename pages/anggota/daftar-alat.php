@@ -105,7 +105,6 @@ $result = mysqli_query($conn, $sql);
               </div>
             </div>
             <div class="card-body">
-
               <div class="card">
                 <div class="table-responsive">
                   <table class="table align-items-center mb-0">
