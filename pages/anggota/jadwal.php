@@ -112,6 +112,7 @@
                     <thead>
                       <?php
                       date_default_timezone_set("Asia/Jakarta");
+                      
                       ?>
                       <tr>
                         <th scope="col">Hari<br>/Tanggal</th>
